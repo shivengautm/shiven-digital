@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shiven Digital — AI Websites for UK Businesses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black: #080A0F;
+      --white: #F4F4F0;
+      --accent: #C8F135;
+      --accent2: #1AFFD5;
+      --grey: #1A1D24;
+      --grey2: #2A2D36;
+      --muted: #6B6F7A;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 4rem;
+      background: rgba(8,10,15,0.7);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: var(--black) !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 2px;
+      font-weight: 500 !important;
+      color: var(--black);
+      transition: background 0.2s, transform 0.2s !important;
+    }
+
+    .nav-cta:hover { background: #d4ff4a; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10rem 4rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 50%, rgba(200,241,53,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(26,255,213,0.05) 0%, transparent 60%);
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(200,241,53,0.08);
+      border: 1px solid rgba(200,241,53,0.2);
+      color: var(--accent);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+      width: fit-content;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      max-width: 14ch;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      color: var(--muted);
+      max-width: 48ch;
+      line-height: 1.7;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .hero-actions {
+      margin-top: 3rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--black);
+      padding: 1rem 2rem;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover { background: #d4ff4a; transform: translateY(-2px); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--white);
+      padding: 1rem 2rem;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.4); transform: translateY(-2px); }
+
+    .hero-stats {
+      margin-top: 5rem;
+      display: flex;
+      gap: 4rem;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .stat-num span { color: var(--accent); }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.2rem;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden;
+      padding: 1rem 0;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 3rem;
+      animation: marquee 25s linear infinite;
+      white-space: nowrap;
+    }
+
+    .marquee-track span {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .marquee-track span.dot {
+      color: var(--accent);
+      letter-spacing: 0;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECTIONS SHARED ── */
+    section { padding: 7rem 4rem; }
+
+    .section-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      max-width: 16ch;
+    }
+
+    /* ── HOW IT WORKS ── */
+    #how {
+      background: var(--grey);
+    }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2px;
+      margin-top: 4rem;
+    }
+
+    .how-card {
+      background: var(--black);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .how-card:hover { background: #0d1018; }
+
+    .how-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .how-card:hover::before { transform: scaleX(1); }
+
+    .how-num {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: rgba(200,241,53,0.1);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .how-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    .how-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .services-left h2 { margin-bottom: 1.5rem; }
+
+    .services-left p {
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 42ch;
+      margin-bottom: 2rem;
+    }
+
+    .service-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .service-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      cursor: default;
+      transition: padding-left 0.3s;
+    }
+
+    .service-item:hover { padding-left: 0.5rem; }
+
+    .service-item:hover .service-name { color: var(--accent); }
+
+    .service-name {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    .service-arrow {
+      color: var(--muted);
+      font-size: 1.2rem;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .service-item:hover .service-arrow { transform: translateX(4px); color: var(--accent); }
+
+    /* ── PRICING ── */
+    #pricing {
+      background: var(--grey);
+      text-align: center;
+    }
+
+    #pricing h2 { margin: 0 auto 1rem; }
+    #pricing .section-tag { text-align: center; }
+
+    .pricing-sub {
+      color: var(--muted);
+      margin: 0 auto 4rem;
+      max-width: 45ch;
+      line-height: 1.7;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: var(--black);
+      padding: 2.5rem 2rem;
+      text-align: left;
+      position: relative;
+      transition: transform 0.3s;
+    }
+
+    .pricing-card:hover { transform: translateY(-4px); }
+
+    .pricing-card.featured {
+      background: var(--accent);
+      color: var(--black);
+    }
+
+    .pricing-card.featured .plan-name,
+    .pricing-card.featured .plan-price,
+    .pricing-card.featured .plan-desc,
+    .pricing-card.featured .plan-features li { color: var(--black); }
+
+    .pricing-card.featured .plan-features li::before { background: var(--black); }
+
+    .featured-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--black);
+      color: var(--accent);
+      padding: 0.3rem 0.7rem;
+      border-radius: 1px;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+
+    .plan-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .plan-price {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 3rem;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .plan-price sup {
+      font-size: 1.2rem;
+      vertical-align: top;
+      margin-top: 0.5rem;
+      display: inline-block;
+    }
+
+    .plan-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .plan-features li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .plan-features li::before {
+      content: '';
+      width: 5px; height: 5px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .plan-btn {
+      display: block;
+      text-align: center;
+      padding: 0.9rem;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--white);
+    }
+
+    .plan-btn:hover { background: rgba(255,255,255,0.08); }
+
+    .pricing-card.featured .plan-btn {
+      background: var(--black);
+      color: var(--accent);
+      border-color: var(--black);
+    }
+
+    .pricing-card.featured .plan-btn:hover { background: #111; }
+
+    /* ── PORTFOLIO ── */
+    #portfolio { }
+
+    .portfolio-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .portfolio-card {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--grey);
+      cursor: pointer;
+    }
+
+    .portfolio-card-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      background: linear-gradient(to top, rgba(8,10,15,0.95) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .portfolio-card:hover .portfolio-card-inner { opacity: 1; }
+
+    .portfolio-bg {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 5rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.03);
+      transition: transform 0.6s ease;
+    }
+
+    .portfolio-card:hover .portfolio-bg { transform: scale(1.05); }
+
+    .portfolio-niche {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .portfolio-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--grey);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .contact-left h2 { margin-bottom: 1.5rem; }
+
+    .contact-left p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .contact-icon {
+      width: 36px; height: 36px;
+      background: rgba(200,241,53,0.08);
+      border: 1px solid rgba(200,241,53,0.15);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--black);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--white);
+      padding: 0.85rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--accent);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-group select option { background: var(--black); }
+
+    .form-submit {
+      background: var(--accent);
+      color: var(--black);
+      padding: 1rem;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .form-submit:hover { background: #d4ff4a; transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 4rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .footer-logo span { color: var(--accent); }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 2rem; }
+      .nav-links { display: none; }
+      #hero { padding: 8rem 2rem 4rem; }
+      section { padding: 5rem 2rem; }
+      #services, #contact { grid-template-columns: 1fr; gap: 3rem; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+      .portfolio-grid { grid-template-columns: 1fr 1fr; }
+      .hero-stats { gap: 2rem; flex-wrap: wrap; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+      .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+
+    @media (max-width: 560px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      h1 { font-size: 2.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Shiven<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#how">Process</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#contact" class="nav-cta">Get Started</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-tag">AI-Powered Web Design · UK</div>
+    <h1>Websites That <em>Win</em> You Customers</h1>
+    <p class="hero-sub">We build fast, modern, AI-powered websites for UK tradespeople and small businesses — so you can stop losing jobs to competitors with better-looking sites.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get a Free Quote</a>
+      <a href="#portfolio" class="btn-ghost">See Our Work</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">48<span>hr</span></div>
+        <div class="stat-label">Average delivery</div>
+      </div>
+      <div>
+        <div class="stat-num">£299<span>+</span></div>
+        <div class="stat-label">Starting from</div>
+      </div>
+      <div>
+        <div class="stat-num">100<span>%</span></div>
+        <div class="stat-label">Mobile optimised</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>Plumbers</span><span class="dot">✦</span>
+      <span>Electricians</span><span class="dot">✦</span>
+      <span>Roofers</span><span class="dot">✦</span>
+      <span>Builders</span><span class="dot">✦</span>
+      <span>Pest Control</span><span class="dot">✦</span>
+      <span>Skip Hire</span><span class="dot">✦</span>
+      <span>Driving Instructors</span><span class="dot">✦</span>
+      <span>Dog Groomers</span><span class="dot">✦</span>
+      <span>Accountants</span><span class="dot">✦</span>
+      <span>Dentists</span><span class="dot">✦</span>
+      <span>Physios</span><span class="dot">✦</span>
+      <span>Plumbers</span><span class="dot">✦</span>
+      <span>Electricians</span><span class="dot">✦</span>
+      <span>Roofers</span><span class="dot">✦</span>
+      <span>Builders</span><span class="dot">✦</span>
+      <span>Pest Control</span><span class="dot">✦</span>
+      <span>Skip Hire</span><span class="dot">✦</span>
+      <span>Driving Instructors</span><span class="dot">✦</span>
+      <span>Dog Groomers</span><span class="dot">✦</span>
+      <span>Accountants</span><span class="dot">✦</span>
+      <span>Dentists</span><span class="dot">✦</span>
+      <span>Physios</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="section-tag reveal">How It Works</div>
+    <h2 class="reveal">Simple process.<br>Serious results.</h2>
+    <div class="how-grid">
+      <div class="how-card reveal">
+        <div class="how-num">01</div>
+        <div class="how-title">Free Consultation</div>
+        <div class="how-desc">We jump on a quick call, understand your business, and figure out exactly what you need. No jargon, no pressure.</div>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-num">02</div>
+        <div class="how-title">We Build It</div>
+        <div class="how-desc">Our AI-powered process means your site is live within 48 hours — fully mobile-ready, fast, and built to convert visitors into calls.</div>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-num">03</div>
+        <div class="how-title">You Review</div>
+        <div class="how-desc">You get to review everything before it goes live. We make unlimited revisions until you're completely happy.</div>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-num">04</div>
+        <div class="how-title">Go Live & Grow</div>
+        <div class="how-desc">Your site goes live and starts working for you 24/7. We handle all the technical stuff so you can focus on your trade.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="services-left reveal">
+      <div class="section-tag">What We Do</div>
+      <h2>Everything your business needs online</h2>
+      <p>From a simple landing page to a full business website with booking forms and SEO — we handle it all, built specifically for UK tradespeople and small businesses.</p>
+      <a href="#contact" class="btn-primary">Start a Project</a>
+    </div>
+    <div class="services-right reveal">
+      <ul class="service-list">
+        <li class="service-item">
+          <span class="service-name">Website Design & Build</span>
+          <span class="service-arrow">→</span>
+        </li>
+        <li class="service-item">
+          <span class="service-name">Mobile Optimisation</span>
+          <span class="service-arrow">→</span>
+        </li>
+        <li class="service-item">
+          <span class="service-name">Google Business Setup</span>
+          <span class="service-arrow">→</span>
+        </li>
+        <li class="service-item">
+          <span class="service-name">Local SEO</span>
+          <span class="service-arrow">→</span>
+        </li>
+        <li class="service-item">
+          <span class="service-name">Contact & Booking Forms</span>
+          <span class="service-arrow">→</span>
+        </li>
+        <li class="service-item">
+          <span class="service-name">Ongoing Maintenance</span>
+          <span class="service-arrow">→</span>
+        </li>
+        <li class="service-item">
+          <span class="service-name">Speed & Performance</span>
+          <span class="service-arrow">→</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="section-tag">Pricing</div>
+    <h2>Transparent pricing.<br>No surprises.</h2>
+    <p class="pricing-sub">One-off payment. No hidden fees. No monthly contracts unless you want ongoing support.</p>
+    <div class="pricing-grid reveal">
+      <div class="pricing-card">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price"><sup>£</sup>299</div>
+        <div class="plan-desc">Perfect for getting online fast with a clean, professional presence.</div>
+        <ul class="plan-features">
+          <li>3-page website</li>
+          <li>Mobile responsive</li>
+          <li>Contact form</li>
+          <li>Google Maps embed</li>
+          <li>Click-to-call button</li>
+          <li>48hr delivery</li>
+        </ul>
+        <a href="#contact" class="plan-btn">Get Started</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="featured-tag">Most Popular</div>
+        <div class="plan-name">Standard</div>
+        <div class="plan-price"><sup>£</sup>499</div>
+        <div class="plan-desc">Everything in Starter plus SEO and Google Business setup to get you found locally.</div>
+        <ul class="plan-features">
+          <li>5-page website</li>
+          <li>Local SEO setup</li>
+          <li>Google Business Profile</li>
+          <li>Booking/quote form</li>
+          <li>Social media links</li>
+          <li>48hr delivery</li>
+        </ul>
+        <a href="#contact" class="plan-btn">Get Started</a>
+      </div>
+      <div class="pricing-card">
+        <div class="plan-name">Pro</div>
+        <div class="plan-price"><sup>£</sup>799</div>
+        <div class="plan-desc">Full-featured website with ongoing monthly support and updates included.</div>
+        <ul class="plan-features">
+          <li>8+ pages</li>
+          <li>Advanced SEO</li>
+          <li>Monthly maintenance</li>
+          <li>Priority support</li>
+          <li>Analytics dashboard</li>
+          <li>Unlimited revisions</li>
+        </ul>
+        <a href="#contact" class="plan-btn">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <div class="portfolio-header">
+      <div>
+        <div class="section-tag reveal">Our Work</div>
+        <h2 class="reveal">Built for trades.<br>Designed to convert.</h2>
+      </div>
+      <a href="#contact" class="btn-ghost reveal">Start Your Project →</a>
+    </div>
+    <div class="portfolio-grid reveal">
+      <div class="portfolio-card" style="background: #0f1a10;">
+        <div class="portfolio-bg">🔧</div>
+        <div class="portfolio-card-inner">
+          <div class="portfolio-niche">Plumbing</div>
+          <div class="portfolio-title">Manchester Plumbing Co.</div>
+        </div>
+      </div>
+      <div class="portfolio-card" style="background: #0f0f1a;">
+        <div class="portfolio-bg">⚡</div>
+        <div class="portfolio-card-inner">
+          <div class="portfolio-niche">Electrical</div>
+          <div class="portfolio-title">Leeds Electrical Services</div>
+        </div>
+      </div>
+      <div class="portfolio-card" style="background: #1a0f0f;">
+        <div class="portfolio-bg">🏠</div>
+        <div class="portfolio-card-inner">
+          <div class="portfolio-niche">Roofing</div>
+          <div class="portfolio-title">Bristol Roofing Specialists</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-left reveal">
+      <div class="section-tag">Get In Touch</div>
+      <h2>Ready to get your business online?</h2>
+      <p>Fill in the form and we'll get back to you within a few hours. No commitment, no pressure — just a friendly chat about what your business needs.</p>
+      <div class="contact-detail">
+        <div class="contact-row">
+          <div class="contact-icon">✉</div>
+          <span>contact@shiven.co</span>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">⏱</div>
+          <span>Response within 2 hours (Mon–Fri)</span>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">🇬🇧</div>
+          <span>Based in the UK — serving businesses nationwide</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="John" />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Business Name</label>
+        <input type="text" placeholder="Smith Plumbing Ltd" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="john@smithplumbing.co.uk" />
+      </div>
+      <div class="form-group">
+        <label>What do you need?</label>
+        <select>
+          <option value="">Select a package...</option>
+          <option>Starter — £299</option>
+          <option>Standard — £499</option>
+          <option>Pro — £799</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell us about your business</label>
+        <textarea placeholder="What do you do, where are you based, and what are you looking for?"></textarea>
+      </div>
+      <button class="form-submit">Send Message →</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Shiven<span>.</span>Digital</div>
+    <p>© 2025 Shiven Digital. All rights reserved.</p>
+    <p>contact@shiven.co</p>
+  </footer>
+
+  <script>
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Form submit
+    document.querySelector('.form-submit').addEventListener('click', () => {
+      alert('Thanks! We\'ll be in touch within 2 hours.');
+    });
+  </script>
+</body>
+</html>
